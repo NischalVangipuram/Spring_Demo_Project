@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Save Employee</title>
+	<style>
+		.games {
+  padding: 20px;
+
+}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+	
+		<h3>Player Form</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Save Player</p>
+	
+		<form class="row" action="#" th:action="@{/players/save}"
+						 th:object="${players}" method="POST">
+		
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{playerId}" />
+			<div class="row col-12">
+			<input type="text" th:field="*{playerName}"
+					class="form-control mb-4 col-4" placeholder="Name" required>
+				<div class="alert alert-warning" th:if="${#fields.hasErrors('playerName')}" th:errors="*{playerName}"></div>
+
+			</div>
+
+			<!--			 <input type="text" th:field="*{country.countryId}"-->
+<!--					class="form-control mb-4 col-4" placeholder="Country Name">-->
+
+			<!-- countries drop down list-->
+			<div class="row col-12"> Country:
+			<select  class="col-2" name="temp" th:field="*{country}">
+				<option th:each="temp:${countries}"
+						th:text="${temp.countryName}"
+						th:value="${temp.countryId}">
+
+				</option>
+			</select>
+			</div>
+			<div class="row col-12 games">
+			<label > Games:
+				<input  type="checkbox" name="isTermsChecked " th:field="${players.games}"
+					   th:each="temp : ${game}"
+					   th:text="${temp.gameName}"
+					   th:value="${temp.gameId}"
+						th:checked="${isChecked}"
+				/>
+				<span class="text-danger" th:text="${errorTermsChecked}"></span>
+			</label>
+			</div>
+
+		<span class="col-5">	<button type="submit" class="btn btn-info col-2">Save</button>
+			</span>
+		</form>
+
+		<hr>
+		<div sec:authorize="hasAnyRole('ROLE_USER','ROLE_PLAYER','ROLE_ADMIN')">
+			<a th:href="@{/players/list}">Back to Players List</a>
+		</div>
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
