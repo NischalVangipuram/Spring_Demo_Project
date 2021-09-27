@@ -14,19 +14,7 @@ public class DemoController {
 
     // add request mapping for /leaders
 
-    @GetMapping("/player")
-    public String showLeaders() {
 
-        return "player";
-    }
-
-    // add request mapping for /systems
-
-    @GetMapping("/user")
-    public String showSystems() {
-
-        return "user";
-    }
 
 }
 

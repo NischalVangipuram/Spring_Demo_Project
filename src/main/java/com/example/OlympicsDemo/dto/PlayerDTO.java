@@ -3,6 +3,7 @@ package com.example.OlympicsDemo.dto;
 import com.example.OlympicsDemo.entity.Country;
 import com.example.OlympicsDemo.entity.Games;
 import com.example.OlympicsDemo.entity.Player;
+import com.example.OlympicsDemo.entity.User;
 import lombok.Data;
 import lombok.ToString;
 
@@ -29,47 +30,21 @@ public class PlayerDTO
 
 
         private Country country;
-        public PlayerDTO(){}
-
-        public PlayerDTO(int playerId, String playerName, Country country, List<Games> games) {
-                this.playerId = playerId;
-                this.playerName = playerName;
-                this.country = country;
-                this.games = games;
-        }
+//        public PlayerDTO(){}
+//
+//        public PlayerDTO(int playerId, String playerName, Country country, List<Games> games) {
+//                this.playerId = playerId;
+//                this.playerName = playerName;
+//                this.country = country;
+//                this.games = games;
+//        }
 
         @ToString.Exclude
         private List<Games> games;
 
-        public int getPlayerId() {
-                return playerId;
-        }
+        private User user;
 
-        public void setPlayerId(int playerId) {
-                this.playerId = playerId;
-        }
 
-        public String getPlayerName() {
-                return playerName;
-        }
 
-        public void setPlayerName(String playerName) {
-                this.playerName = playerName;
-        }
 
-        public Country getCountry() {
-                return country;
-        }
-
-        public void setCountry(Country country) {
-                this.country = country;
-        }
-
-        public List<Games> getGames() {
-                return games;
-        }
-
-        public void setGames(List<Games> games) {
-                this.games = games;
-        }
 }

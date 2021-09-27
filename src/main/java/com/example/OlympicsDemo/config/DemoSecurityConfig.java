@@ -23,7 +23,13 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// use jdbc authentication ... oh yeah!!!
 
-		auth.jdbcAuthentication().dataSource(securityDataSource);
+		auth.jdbcAuthentication().dataSource(securityDataSource)
+				.authoritiesByUsernameQuery(
+						"SELECT u.username, a.authority " +
+								"FROM authorities a, users u " +
+								"WHERE u.username = ? " +
+								"AND u.authority_id = a.authority_id"
+				);
 
 	}
 
@@ -32,7 +38,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 	{
 
 		http.authorizeRequests()
-			.antMatchers("/").hasAnyRole("PLAYER")
+			//.antMatchers("/").hasAnyRole("PLAYER")
 			.antMatchers("/player/**").hasRole("PLAYER")
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/user/**").hasRole("USER")

@@ -48,9 +48,9 @@
 <!-- Add a button -->
 <div sec:authorize="hasAnyRole('ROLE_PLAYER')">
 
-<a th:href="@{/players/showFormForAdd}"
+<a th:href="@{/players/showFormForUpdate(playerId=${myPlayerDetails.playerId})}"
    class="btn btn-primary btn-sm mb-3">
-    Register
+    Edit my profile
 </a>
 </div>
 <div class="container">

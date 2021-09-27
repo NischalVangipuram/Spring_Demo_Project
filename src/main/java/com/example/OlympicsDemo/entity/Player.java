@@ -1,14 +1,20 @@
 package com.example.OlympicsDemo.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @ToString
 @Entity
 @Table(name="Players")
@@ -22,10 +28,9 @@ public class Player {
 	private int playerId;
 	// PlayerId => player_id
 
-	@NotNull(message = "Name is required")
+	//@NotNull(message = "Name is required")
 	@Column(name="player_name")
 	@Size(min=1,message = "is required")
-	@Pattern(regexp = "[^0-9]*",message = "Numbers not allowed")
 	private String playerName;
 
 	@NotNull(message = "is required")
@@ -41,51 +46,17 @@ public class Player {
 			inverseJoinColumns = @JoinColumn(name="games_games_id"))
 	private List<Games> games;
 
+	@ToString.Exclude
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	@Valid
+	private User user;
+
 	// define constructors
 	
 	public Player()
 	{
 		
-	}
-
-
-
-	public int getPlayerId() {
-		return playerId;
-	}
-
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
-	}
-
-	public String getPlayerName() {
-		return playerName;
-	}
-
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
-
-	public Country getCountry() {
-		return country;
-	}
-
-	public void setCountry(Country country) {
-		this.country = country;
-	}
-
-	public List<Games> getGames() {
-		return games;
-	}
-
-	public void setGames(List<Games> games) {
-		this.games = games;
-	}
-
-	public void addGame(List<Games> gamesList)
-	{
-
-		games=gamesList;
 	}
 
 

@@ -2,6 +2,7 @@ package com.example.OlympicsDemo.service;
 
 import com.example.OlympicsDemo.dao.PlayerRepository;
 import com.example.OlympicsDemo.entity.Player;
+import com.example.OlympicsDemo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,16 @@ public class PlayerServiceImpl implements PlayerService {
 	@Override
 	public void deleteById(int theId) {
 		playerRepository.deleteById(theId);
+	}
+
+	@Override
+	public Player findPlayer(String s){
+		return playerRepository.findByPlayerName(s);
+	}
+
+	@Override
+	public Player findPlayerByUser(User theUser){
+		return playerRepository.findByUser(theUser);
 	}
 
 }

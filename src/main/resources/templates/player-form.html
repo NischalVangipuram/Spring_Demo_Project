@@ -45,20 +45,32 @@
 		
 			<!-- Add hidden form field to handle update -->
 			<input type="hidden" th:field="*{playerId}" />
-			<div class="row col-12">
-			<input type="text" th:field="*{playerName}"
-					class="form-control mb-4 col-4" placeholder="Name" required>
-				<div class="alert alert-warning" th:if="${#fields.hasErrors('playerName')}" th:errors="*{playerName}"></div>
+				<input type="hidden" th:field="*{user.userId}"/>
+			<input type="hidden" th:field="*{user.enabled}"/>
+			<input type="hidden" th:field="*{user.theAuthority}"/>
+
+<!--			<div class="row col-12">-->
+<!--			<input type="text" th:field="*{playerName}"-->
+<!--					class="form-control mb-4 col-4" placeholder="Name" required>-->
+<!--				<div class="alert alert-warning" th:if="${#fields.hasErrors('playerName')}" th:errors="*{playerName}"></div>-->
+
+<!--			</div>-->
+			<div class="col-12 row">
+				<input type="text" th:field="*{user.username}"
+					   class="form-control mb-4 col-4" placeholder="Player Name" required>
+				<div class="alert alert-warning" th:if="${#fields.hasErrors('*{user.username}')}" th:errors="*{user.username}"></div>
+
+				<div class="text-danger" th:text="${playerAlreadyExist}"></div>
 
 			</div>
-<!--			<div>-->
-<!--				<input type="text" th:field="*{playerName}"-->
-<!--					   class="form-control mb-4 col-4" placeholder="Name" required>-->
-<!--				-->
-<!--			</div>-->
 
-			<!--			 <input type="text" th:field="*{country.countryId}"-->
-<!--					class="form-control mb-4 col-4" placeholder="Country Name">-->
+			<div class="col-12 row">
+				<input type="text" th:field="*{user.password}"
+					   class="form-control mb-4 col-4" placeholder="Password" th:value="pass" required>
+				<div class="alert alert-warning" th:if="${#fields.hasErrors('*{user.password}')}" th:errors="*{user.password}"></div>
+
+			</div>
+
 
 			<!-- countries drop down list-->
 			<div class="row col-12"> Country:
@@ -78,8 +90,7 @@
 					   th:value="${temp.gameId}"
 
 				/>
-<!--				th:checked="${isChecked}"-->
-<!--				<span class="text-danger" th:text="${errorTermsChecked}"></span>-->
+				<span class="text-danger" th:text="${errorTermsChecked}"></span>
 			</label>
 			</div>
 
